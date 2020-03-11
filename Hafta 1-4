@@ -1,0 +1,234 @@
+# Programlama-Lab.
+def KuvvetAlma(a,b):   
+    if b==0:
+        return 1
+    if b==1:
+        return a
+    c=1
+    for i in range(b):
+        c*=a
+    return c
+
+#Özyinelemeli Kuveet Alma
+def RecKuvvet(a,b):  
+    if b==0:
+        return 1
+    if b==1:
+        return a
+    if b>1:
+        if b%2 == 0:
+            return RecKuvvet(a*a, b//2)
+        else:
+            return RecKuvvet(a*a, b//2)*a
+
+#"Maksimum toplam değer" 
+liste=[4,-3,5,-2,-1,2,6,-2]
+max=0
+for i in range(len(liste)):
+    for j in range(i+1, len(liste)):
+        t=0
+        for k in range(i,j+1):
+             t=t+liste[k]
+        if t>max:
+            max=t
+            i_1, i_2 = i,j
+print(max_1, i_1, i_2)
+
+
+
+#My_f_3 fonksiyonu diziyi her adımda ikiye böler ve aramayı daha hızlı yapar.
+
+def max_of_two(a, b):
+    if a > b:
+        return a
+    else:
+        turn b
+
+def max_of_three(a, b, c):
+    return max_of_two(a, max_of_two(b, c))
+
+def my_f_3(liste=[4, -3, 5, -2, -1, 2, 6, -2]): 
+    n=len(liste)
+    if (n == 1):
+        return liste[0]
+    left_i= 0
+    left_j= n//2
+
+    right_i= n//2
+    right_j= n
+
+    left_sum= my_f_3(liste[left_i:left_j])
+    right_sum= my_f_3(liste[right_i:right_j])
+
+    temp_left_sum= 0
+    t=0
+    for i in range(left_j-1, left_i-1, -1):
+        t= t+liste[i]
+        if(t>temp_left_sum):
+            temp_left_sum= t
+    t=0
+    temp_right_sum =0
+    for i in range(right_i, right_j):
+        t=t+liste[i]
+        if(t>temp_right_sum):
+            temp_right_sum=t
+
+    center_sum= temp_left_sum+temp_right_sum
+    return max_of_three(left_sum,right_sum,center_sum)
+
+#SIRALAMA ALGORİTMALARI
+#1-)BUBBLE SORT
+n=int(input("kaç tane sayı girilecek: "))
+
+arr=[]
+
+for a in range(n):
+    arr.append(int(input()))
+
+for i in range(n):
+    for j in range(n-i-1):
+        if arr[j]<arr[j+1]:
+            temp=arr[j]
+            arr[j+1]=arr[j]
+            arr[j]=temp
+            #arr[j],arr[j+1]=arr[j+1],arr[j]
+
+for c in range(n):
+    print(arr[c])
+
+#Fonksiyon içinde bubbleshort
+def bubblesort(liste):
+    for i in range(len(liste)):
+        for j in range(len(liste)-i-1):
+            if liste[j]>liste[j+1]:
+                arr[j],arr[j+1]=arr[j+1],arr[j]
+
+#2-)SELECTION SORT
+A=[64,25,12,22,11]
+for i in range(len(A)):
+    min_idx=i #başlangıç minimum değeri
+    for j in range(i+1,len(A)):
+        if A[min_idx]>A[j]:
+            min_idx=j
+    A[i],A[min_idx]=A[min_idx],A[i] #Bulunan minimum element ile ilk elementin yeri değiştirilir
+
+#3-)INSERTION SORT
+def insertionSort(arr):
+    for i in range(1,len(arr)): 
+        key=arr[i]
+        j=i-1
+        while j>=0 and key<arr[j]:
+            arr[j+1]=arr[j]
+            j-=1
+        arr[j+1]=key
+
+arr=[12,11,13,5,6]
+insertionSort(arr)
+
+#4-)SHELL SORT
+def shellSort(arr):
+    n=len(arr)
+    aralik=n/2
+    while aralik>0:
+        for i in range(aralik,n):
+            temp=arr[i]
+            j=i
+            while j>=aralik and arr[j-aralik]>temp:
+                arr[j]=arr[j-aralik]
+                j-=aralik
+            arr[j]=temp
+        aralik/=2
+
+arr[12,34,54,2,3]
+
+#Fibocci Sayısı
+def fibo(n):
+    if n<2:
+        return n
+    else:
+        return fibo(n-1)+fibo(n-2)
+print(fibo(32)) #->2178309
+
+
+#KÜTÜPHANE
+#1
+list1=[0,5,25,100,5,5,0,100]
+
+def myh(list1):
+    my_d=dict()
+    for i in list1: #i değişkeni, döngüde listedeki elemanların değerini alır
+        if i in my_d:
+            my_d[i]+=1
+        else:
+            my_d[i]=1
+    return my_d
+
+print(myh(list1) #-> {0:2,5:3,25:1,100:2}
+
+#2
+my_d={1:"Bir",2:"İki",3:"Üç",4:"Dört"}
+my_d[-10]=50
+
+if 6 not in my_d:
+      my_d[6]="Altı"
+
+for i in my_d.keys():
+      print(i,my_d[i])
+      
+#3
+def my_h(list1):
+      my_d={}
+      for item in list1:
+          if item not in my_d:
+              my_d[item]=my_d[item]+1
+      return my_d
+
+print(my_h[2,3,4,6,2,5,6,6,6,5,6,2]) #{2:3,3:1,4:1,6:6,5:2}
+
+#sözlükte değer kontrolü
+def lookup(d,v):
+      for key in d:
+          if key==v:
+              return 1
+      return -1
+
+d= [4,9,6,8,2,3,7,14,23]
+print(lookup(d,87)) #-> -1
+#Finiteset?            
+
+from symyp import FiniteSet
+from fractions import Fraction
+	
+t=Finiteset(1,2,3)
+s=Finiteset(2,4,6)
+		
+if t==s:
+      print("True")
+else:
+      print("False")
+
+print(t.union(s))
+print(t.intersect(s))
+print(t**2)
+
+def probability(spare,event):
+	return (en(event)/len(spare))
+
+def check_prime(number):  # asal sayı kontrolü 
+    if number!=1
+        for factor in range(2,number):
+            if number%factor==0:
+                return False
+	else:
+	    return False
+	return True
+
+space = Finiteset(*range(1,21))
+primes=[]
+for num in sapce:
+	if check.primes(num)
+		primes.append(num)
+event=Finiteset(*primes)
+p=probability(space,event)  
+print(p)
+
